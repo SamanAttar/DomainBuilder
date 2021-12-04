@@ -1,4 +1,4 @@
-public abstract class sObjectBuilder {
+public abstract class DomainBuilder {
 
     public sObject record;
 
@@ -9,17 +9,17 @@ public abstract class sObjectBuilder {
         this.record = Schema.getGlobalDescribe().get(sObjectType).newSObject();
     }
 
-    public sObjectBuilder withName(String name){
+    public DomainBuilder withName(String name){
         this.record.put('Name', name);
         return this;
     }
 
-    public sObjectBuilder withOwnerId(Id ownerId){
+    public DomainBuilder withOwnerId(Id ownerId){
         this.record.put('OwnerId', ownerId);
         return this;
     } 
 
-    public sObjectBuilder withRecordType(Id recordTypeId){
+    public DomainBuilder withRecordType(Id recordTypeId){
         this.record.put('RecordTypeId', recordTypeId);
         return this;
     }

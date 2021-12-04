@@ -1,4 +1,4 @@
-public class AccountBuilder extends sObjectBuilder {
+public class AccountBuilder extends DomainBuilder {
 
     public AccountBuilder() {
         setType('Account');
