@@ -1,23 +1,24 @@
 public class AccountBuilder extends DomainBuilder {
 
-    public AccountBuilder() {
-        setType('Account');
-        super.record = new Account();
+    private Account accountRecord;
+
+    public AccountBuilder() {        
+        accountRecord = (Account) initializeRecord('Account');
     }
     
     public AccountBuilder(Account existingAccount) {
-        setType('Account');
-        super.record = existingAccount;
+        accountRecord = (Account) initializeRecord('Account');
     }
 
-    public override sObject build(){
-        return super.record;
+    public AccountBuilder withName(String name){
+        accountRecord.Name = name;
+        return this;
     }
 
-    public override sObject buildAndInsert(){
-        insert super.record;
-        return super.record;
-    }
-
+    public override void validate(){
+        if(String.isEmpty(accountRecord.Name)){
+            accountRecord.Name = 'Builder Generated Record';
+        }
+    }    
 
 }

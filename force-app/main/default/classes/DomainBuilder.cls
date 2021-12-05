@@ -1,26 +1,39 @@
 public abstract class DomainBuilder {
 
-    public sObject record;
+    private sObject domainRecord;
 
-    public abstract sObject build();
-    public abstract sObject buildAndInsert();
-
-    public void setType(String sObjectType){
-        this.record = Schema.getGlobalDescribe().get(sObjectType).newSObject();
+    public virtual sObject build(){
+        validate();
+        return domainRecord;
     }
 
-    public DomainBuilder withName(String name){
-        this.record.put('Name', name);
-        return this;
+    public virtual sObject buildAndCommit(){
+        validate();
+        insert domainRecord;
+        return domainRecord;
+    }
+
+    public virtual void validate(){
+        return; // TODO: Don't do this. Any basic validation I can do?
+    }
+
+    public sObject initializeRecord(String sObjectType){
+        this.domainRecord = Schema.getGlobalDescribe().get(sObjectType).newSObject();
+        return this.domainRecord;
+    }
+
+    public sObject initializeRecord(sObject sObjectInstance){
+        this.domainRecord = sObjectInstance;
+        return this.domainRecord; 
     }
 
     public DomainBuilder withOwnerId(Id ownerId){
-        this.record.put('OwnerId', ownerId);
+        this.domainRecord.put('OwnerId', ownerId);
         return this;
     } 
 
     public DomainBuilder withRecordType(Id recordTypeId){
-        this.record.put('RecordTypeId', recordTypeId);
+        this.domainRecord.put('RecordTypeId', recordTypeId);
         return this;
     }
  
