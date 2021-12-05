@@ -9,7 +9,7 @@ public abstract class DomainBuilder {
 
     public virtual sObject buildAndCommit(){
         validate();
-        insert domainRecord;
+        upsert domainRecord;
         return domainRecord;
     }
 
