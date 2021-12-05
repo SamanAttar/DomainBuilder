@@ -5,10 +5,12 @@ public class AccountBuilderTest {
     private static void basicAccountCreation() {
 
         Test.startTest();
-            Account a = (Account) new AccountBuilder().withName('Nice ACC').buildAndCommit();
+            Account accWithExplicitName = (Account) new AccountBuilder().withName('MegaCorp').buildAndCommit();
+            Account accWithImplicitName = (Account) new AccountBuilder().buildAndCommit();
         Test.stopTest();
 
-        System.assertNotEquals('', a.Id, 'The account should have an ID once inserted');
+        System.assertNotEquals('', accWithExplicitName.Id, 'The account should have an ID once inserted');
+        System.assertNotEquals('', accWithImplicitName.Id, 'The account should have an ID once inserted');
 
     }
 }

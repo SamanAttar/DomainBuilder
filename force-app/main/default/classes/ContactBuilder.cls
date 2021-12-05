@@ -25,6 +25,11 @@ public class ContactBuilder extends DomainBuilder {
         return this;
     }
 
+    public ContactBuilder withAccount(){ 
+        contactRecord.accountId = new AccountBuilder().buildAndCommit().Id;
+        return this;
+    }
+
     public override void validate(){
         if(String.isEmpty(contactRecord.LastName)){
             contactRecord.LastName = 'Builder Generated Record';
